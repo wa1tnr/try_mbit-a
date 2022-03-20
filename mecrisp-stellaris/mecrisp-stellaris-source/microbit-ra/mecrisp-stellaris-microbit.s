@@ -75,7 +75,7 @@ Reset: @ Einsprung zu Beginn
    .include "../common/catchflashpointers.s"
 
    welcome " with M0 core for Microbit by Matthias Koch"
-   writeln "Modified for nRF51822 by John Huberts (JIB)"
+   writeln "Modified for nRF51822 by John Huberts (JIB) built 19 Mar 2022 by wa1tnr"
 
    @ Ready to fly !
    .include "../common/boot.s"
