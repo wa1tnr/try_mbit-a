@@ -12,22 +12,40 @@ hex
 ;
 
 : hm. ( addr -- )
-  dup isrom? if um. $20 emit exit then
+  dup isrom? if um. exit then
   $3f emit exit
 ;
 
+: pads ( n -- ) \ side-effect: padded spaces
+  0 do space loop ;
+
+: padr. ( addr -- addr ) \ side-effect: print padding to address size in digits
+  \ dup .
+  dup $10 < if \ single digit
+      4 pads exit then
+  dup $100 < if 3 pads exit then
+  dup $1000 < if 2 pads exit then
+  dup $40000 < if 1 pads exit then
+  \ $3f emit exit \ may want a drop here somewhere
+;
+
 : dumplinehex ( addr - addr )
+  padr. dup .
+  $3a emit space
   dup
-  $10 0 do hm. loop cr
+  4 0 do hm. loop space
+  4 0 do hm. loop space space
+  4 0 do hm. loop space
+  4 0 do hm. loop space space
   $10 - \ set address back $10
 ;
  
-: dumplineasci ( addr - addr+$10)
+: dumplineasci ( addr -- addr+$10)
   $10 + ;
 
-: diffi ( addr - addr+256)
+: di ( addr - addr+$100)
   dumplinehex
-  dumplineasci
+  dumplineasci cr
   swap drop
 ;
 
