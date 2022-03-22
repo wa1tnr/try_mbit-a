@@ -41,7 +41,8 @@ hex
 ;
  
 : dumplineasci ( addr -- addr+$10)
-  $10 + ;
+  $10 0 do gm. loop
+;
 
 : di ( addr - addr+$100)
   dumplinehex
