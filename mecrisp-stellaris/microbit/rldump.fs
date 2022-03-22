@@ -29,7 +29,7 @@ hex
   \ $3f emit exit \ may want a drop here somewhere
 ;
 
-: dumplinehex ( addr - addr )
+: dlhx ( addr - addr )
   padr. dup .
   $3a emit space
   dup
@@ -40,14 +40,17 @@ hex
   $10 - \ set address back $10
 ;
  
-: dumplineasci ( addr -- addr+$10)
+: dlasc ( addr -- addr+$10)
   $10 0 do gm. loop
 ;
 
-: di ( addr - addr+$100)
-  dumplinehex
-  dumplineasci cr
+: dln ( addr - addr+$10)
+  dlhx
+  dlasc cr
   swap drop
 ;
+
+: dump ( addr lines -- addr+$10*lines)
+  0 do dln loop ;
 
 -99 dup 1+ dup 1+
