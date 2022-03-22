@@ -44,6 +44,8 @@ hex
   $10 0 do gm. loop
 ;
 
+1 variable svbase
+
 : dln ( addr - addr+$10)
   dlhx
   dlasc cr
@@ -51,6 +53,11 @@ hex
 ;
 
 : dump ( addr lines -- addr+$10*lines)
-  0 do dln loop ;
+  base @ svbase !
+  hex
+  cr
+  0 do dln loop
+  svbase @ base !
+;
 
 -99 dup 1+ dup 1+
