@@ -1,5 +1,5 @@
 \ rldump.fs
-\ Tue 22 Mar 12:13:42 UTC 2022
+\ Tue 22 Mar 13:51:15 UTC 2022
 
 \ include dump.fs
 
@@ -13,6 +13,7 @@ hex
 
 : hm. ( addr -- )
   dup isrom? if um. exit then
+  dup isram? if um. exit then
   $3f emit exit
 ;
 
@@ -33,10 +34,10 @@ hex
   padr. dup .
   $3a emit space
   dup
-  4 0 do hm. loop space
-  4 0 do hm. loop space space
-  4 0 do hm. loop space
-  4 0 do hm. loop space space
+  2 0 do
+      4 0 do hm. loop space
+      4 0 do hm. loop space space
+  loop
   $10 - \ set address back $10
 ;
  
